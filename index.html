@@ -6,42 +6,71 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.p1').hover(function(){
-                var maxWidth = 390;
-                var maxHeight = 800;
-    
-                var arriba = Math.random() * (maxHeight - 1) + 1;
-                var abajo = Math.random() * (maxWidth - 1) + 1;
-    
-                // Asegurarse de que la posición no exceda los límites
-                arriba = Math.min(arriba, maxHeight - $(this).height());
-                abajo = Math.min(abajo, maxWidth - $(this).width());
-    
-                $(this).css('top', arriba);
-                $(this).css('left', abajo);
-            });
-        });
-    
-        function dijoSi(){
-            document.getElementById('si').style.display = 'block';
-        }
-    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  
     
 </head>
-<body >
-    <div class="contenedor">
-        <div class="titulo">
-            <h1>¿Quieres ser mi novia?</h1>
+
+
+<body class="bg-[#A264BF] text-white">
+
+
+
+    <div class="space-y-10 h-screen w-screen flex flex-col justify-center items-center">
+
+        <div class="text-2xl">
+           <p>¿Quieres ser mi Novia?</p>
         </div>
-        <div class="opciones">
-            <p class="p1">No</p>
-            <p onclick="dijoSi()" class="p2">Si</p>
-            <div id="si">
-                <h2>Gracias bb, lo sabía. Feliz primer día de novios :3</h2>
-            </div>
+
+        <div class=" space-x-10">
+            <button class="bg-red-500 p-4 px-10 relative rounded-md" id="noBtn">No</button>
+            <button class="bg-green-500 p-4 px-10 relative rounded-md" id="siBtn">SI</button>
+        </div>
+
+        <div id="respuesta" class="hidden bg-green-500 p-4">
+            <h2>Gracias bb, lo sabía. Feliz primer día de novios :3</h2>
         </div>
     </div>
+
 </body>
+
 </html>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+  const siBtn = document.getElementById('siBtn');
+  const respuestaDiv = document.getElementById('respuesta');
+
+  siBtn.addEventListener('click', function () {
+    // Mostrar el div al hacer clic en el botón "SI"
+    respuestaDiv.classList.remove('hidden');
+  });
+
+  // Opcional: Manejar el caso en el que el usuario haga clic en "No"
+  const noBtn = document.getElementById('no');
+  noBtn.addEventListener('click', function () {
+    // Puedes agregar lógica adicional para el caso de "No" si es necesario
+  });
+});
+
+
+document.getElementById('noBtn').addEventListener('mouseover', function() {
+    const button = this;
+    
+    // Obtén las dimensiones del body
+    const bodyWidth = document.body.clientWidth;
+    const bodyHeight = document.body.clientHeight;
+
+    // Calcula una posición aleatoria dentro de los límites del body
+    const randomX = Math.random() * (bodyWidth - button.clientWidth);
+    const randomY = Math.random() * (bodyHeight - button.clientHeight);
+
+    // Aplica la nueva posición al botón
+    button.style.position = 'absolute';
+    button.style.left = `${randomX}px`;
+    button.style.top = `${randomY}px`;
+});
+
+
+</script>
